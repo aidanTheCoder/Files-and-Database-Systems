@@ -1,0 +1,5 @@
+DROP TABLES Schedule;
+DROP TABLES Players;
+DROP TABLES Teams;
+DROP TABLES Games;
+DROP TABLES Opposition;
