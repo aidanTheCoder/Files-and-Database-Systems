@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+  h1 {
+    text-align: center;
+  }
+
+  img {
+    height: 150px;
+  }
+
+  div {
+    text-align: center;
+    padding: 10px;
+  }
+
+  input {
+    margin: 5px;
+  }
+
+  .correct {
+    border-color: green;
+  }
+
+  .wrong {
+    border-color: red;
+  }
+</style>
+<script src="loadfile.js"></script>
+<script>
+  /* create a random order for going through the pictures */
+  var order = [];
+  /* randomize indexes for the choices. To show 4 choices,
+     swap the correct choice with 0, then just use the first 4 */
+  var map = [];
+  /* since correct choice is always 0, randomize the buttons, too */
+  var btnMap = [0, 1, 2, 3];
+  /* button elements as an array so we can loop through them */
+  var btn = [];
+  /* img element */
+  var picture;
+  var score = 0;
+  var outOf = 0;
+  /* index for going through the order[] list for each picture */
+  var chosen = 0;  
+  /* populate an array with length index values in sequence */
+  function populateSequence(arr, length) {
+    for (i = 0; i < length; i++)
+      arr.push(i);
+  }
+
+  /* shuffle an array */
+  function shuffle(arr) {
+    for (i = 0; i < arr.length; i++) {
+      var j = Math.floor(Math.random() * arr.length);
+      var temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+    }
+  }
+
+  /* in listener, check if button shows correct answer (map[0]) */
+  function check() {
+    if (this.getAttribute("value") == JSONobj.motorsports_teams[map[0]].names) {
+      score++;
+      document.getElementById("score").innerHTML = score;
+      document.getElementById("major").innerHTML = JSONobj.motorsports_teams[map[0]].major;
+    } else {
+      this.setAttribute("class", "wrong");
+    }
+    outOf++;
+    document.getElementById("outOf").innerHTML = outOf;
+    showAnswer();
+  }
+
+  function showAnswer() {
+    btn[btnMap[0]].setAttribute("class", "correct");
+  }
+
+  /* find next name in list with same race series and swap */
+  function genderReplace(indexOfChoice) {
+    var temp = map[indexOfChoice];
+    for (j = 4; j < map.length; j++) {
+      if (JSONobj.motorsports_teams[map[j]].series == JSONobj.motorsports_teams[map[0]].series) {
+        map[indexOfChoice] = map[j];
+        map[j] = temp;
+        j = map.length;
+      }
+    }
+  }
+  
+  /* check each choice to have same series as answer */
+  function genderAdjust() {
+    for (i = 1; i < 4; i++) {
+      if (JSONobj.motorsports_teams[map[i]].series != JSONobj.motorsports_teams[map[0]].series) {
+        genderReplace(i);
+      }
+    }
+  }
+
+  /* shuffle, then swap correct answer with first element */
+  function shuffleMap(indexOfAnswer) {
+    shuffle(map);
+    for (i = 0; i < map.length && map[i] != indexOfAnswer; i++);
+    var temp = map[0];
+    map[0] = map[i];
+    map[i] = temp;
+    /* make sure the first four choices have same series */
+    genderAdjust();
+  }
+
+  /* advance person to be displayed */
+  function updateChosen() {
+    /* advance to next picture */
+    chosen++;
+    /* if reached end, reshuffle and start again */
+    if (chosen >= order.length) {
+      shuffle(order);
+      chosen = 0;
+    }
+  }
+
+  function goNext() {
+    updateChosen();
+    /* shuffle the choices, and put chosen first */
+    shuffleMap(order[chosen]);
+    /* shuffle the buttons for each choice */
+    shuffle(btn);
+    /* populate the buttons */
+    for (i = 0; i < 4; i++) {
+      btn[i].setAttribute("value", JSONobj.motorsports_teams[map[i]].names);
+      btn[i].setAttribute("class", "");
+    }
+    /* display the chosen one's picture */
+    picture.setAttribute("src", JSONobj.motorsports_teams[map[0]].pictures);
+    /* clear the display of major */
+    document.getElementById("major").innerHTML = "";
+  }
+
+  function start() {
+	requestJSON('motorsports.json', loadJSON);
+    document.getElementById("data_title").innerHTML = "Motorsports Teams";
+  }
+  window.addEventListener("load", start, "false");
+</script>
+</head>
+
+<body>
+  <h1 id="data_title">Flash Cards</h1>
+  <div>
+    <img id="picture" src="">
+  </div>
+  <form>
+    <div>
+      <input id="btn0" type="button" value="">
+      <input id="btn1" type="button" value="">
+      <input id="btn2" type="button" value="">
+      <input id="btn3" type="button" value="">
+    </div>
+    <div>
+      <input id="show" type="button" value="Answer">
+      <span id="score">0</span>/<span id="outOf">0</span>
+      <input id="next" type="button" value="Next">
+    </div>
+    <div>
+      <span id="major">""</span>
+    </div>
+  </form>
+</body>
+
+</html>

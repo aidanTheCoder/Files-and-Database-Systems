@@ -1,0 +1,15 @@
+{ "motorsports_teams": [
+{"pictures":"f1_alfa_romeo.jpg", "names":"Alfa Romeo", "series":"1", "major":"Won the first Formula 1 championship in 1950"},
+{"pictures":"f1_mclaren.jpg", "names":"McLaren", "series":"1", "major":"Has the second most number of titles in Formula 1, 12 titles over 7 drivers"},
+{"pictures":"f1_benetton.jpg", "names":"Benetton", "series":"1", "major":"Team where Michael Schumacher won the 1st of 7 championship titles"},
+{"pictures":"f1_lotus.jpg", "names":"Lotus", "series":"1", "major":"Formerly Benetton Formula"}, 
+{"pictures":"f1_mercedes.jpg", "names":"Mercedes", "series":"1", "major":"Home of 7-time Formula 1 Champion Lewis Hamilton"}, 
+{"pictures":"f1_alpha_tauri.jpg", "names":"La Scuderia Alpha Tauri", "series":"1", "major":"RedBull Racing Jr. Team"}, 
+{"pictures":"f1_redbull.jpg", "names":"RedBull Racing", "series":"1", "major":"The first race team to be owned by an energy drink company"}, 
+{"pictures":"indycar_chip_ganassi.jpg", "names":"Chip Gnassi Racing", "series":"0", "major":"Sponsors teams in Indycar and IMSA, recently sold the NASCAR team"}, 
+{"pictures":"nascar_rcr.jpg", "names":"Richard Childress Racing", "series":"0", "major":"Has claimed 16 NASCAR Cup Series Titles"}, 
+{"pictures":"indycar_penske.jpg", "names":"Penske Motorsports", "series":"0", "major":"Has seveal race teams across NASCAR, Indycar"}, 
+{"pictures":"nascar_woodbrothers.jpg", "names":"Wood Brothers Racing", "series":"0", "major":"Has 99 career team wins"}, 
+{"pictures":"nascar_petty.jpg", "names":"Richard Petty Motorsports", "series":"0", "major":"Team of Richard Petty, most winngest stock car driver of all time with 200 wins"}, 
+{"pictures":"nascar_hendrix.jpg", "names":"Hendrix Motorsports", "series":"0", "major":"Most winningest stock car team of all time"}]}
+				 
